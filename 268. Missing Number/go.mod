@@ -1,3 +1,3 @@
-module leetocde
+module leetocde_268
 
 go 1.20
