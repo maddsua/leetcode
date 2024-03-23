@@ -10,6 +10,14 @@ type ListNode struct {
 	Next *ListNode
 }
 
+func addNode(head *ListNode, value int) *ListNode {
+	vAsInt, _ := strconv.Atoi(strconv.Itoa(value))
+	return &ListNode{
+		Val:  vAsInt,
+		Next: head,
+	}
+}
+
 func doubleIt(head *ListNode) *ListNode {
 
 	var number string
@@ -17,7 +25,7 @@ func doubleIt(head *ListNode) *ListNode {
 		number += strconv.Itoa(it.Val)
 	}
 
-	var doubled string
+	var result *ListNode
 	var carry int
 
 	for i := len(number) - 1; i >= 0; i-- {
@@ -26,27 +34,17 @@ func doubleIt(head *ListNode) *ListNode {
 		next := (posInt * 2) + carry
 
 		if next < 10 {
-			doubled += strconv.Itoa(next)
+			result = addNode(result, next)
 			carry = 0
 			continue
 		} else {
 			carry = next / 10
-			doubled += strconv.Itoa(next % 10)
+			result = addNode(result, next%10)
 		}
 	}
 
 	if carry > 0 {
-		doubled += strconv.Itoa(carry)
-	}
-
-	var result *ListNode
-
-	for _, character := range doubled {
-		vAsInt, _ := strconv.Atoi(string(character))
-		result = &ListNode{
-			Val:  vAsInt,
-			Next: result,
-		}
+		result = addNode(result, carry)
 	}
 
 	return result
@@ -63,13 +61,13 @@ func reverseString(s string) string {
 	return string(r)
 }
 
-func intToLL(number int64) *ListNode {
+func numberToLL(number string) *ListNode {
 
-	numberAsString := reverseString(strconv.FormatInt(number, 10))
+	temp := reverseString(number)
 
 	var tempHead *ListNode
 
-	for _, character := range numberAsString {
+	for _, character := range temp {
 		vAsInt, _ := strconv.Atoi(string(character))
 		tempHead = &ListNode{
 			Val:  vAsInt,
@@ -89,7 +87,7 @@ func printLLNumber(head *ListNode) {
 
 func main() {
 
-	number := intToLL(100500)
+	number := numberToLL("100500")
 	printLLNumber(number)
 
 	doubled := doubleIt(number)
