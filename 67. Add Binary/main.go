@@ -15,11 +15,9 @@ func parseBuffer(str string, width int64) []byte {
 
 	result := make([]byte, byteWidth)
 
-	posShift := len(str) % 8
+	for i := len(str) - 1; i >= 0; i-- {
 
-	for i := 0; i < len(str); i++ {
-
-		idx := i + posShift
+		idx := i
 		byteIdx := idx / 8
 		bitIdx := (idx % 8)
 
@@ -28,7 +26,7 @@ func parseBuffer(str string, width int64) []byte {
 			setBit = 1
 		}
 
-		println("bitIdx", bitIdx, setBit, string(str[i]))
+		//println("bitIdx", bitIdx, setBit, string(str[i]))
 
 		result[byteIdx] |= byte(setBit << bitIdx)
 	}
@@ -62,6 +60,6 @@ func addBinary(a string, b string) string {
 func main() {
 	//addBinary("10", "1")
 	//addBinary("11", "1")
-	//addBinary("1010", "1011")
+	addBinary("1010", "1011")
 	//println(addBinary("1010", "1011"))
 }
