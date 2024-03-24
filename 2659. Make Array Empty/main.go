@@ -4,56 +4,31 @@ import (
 	"sort"
 )
 
-func isSortedAscend(arr []int) bool {
-
-	for i := 1; i < len(arr); i++ {
-		if arr[i-1] > arr[i] {
-			return false
-		}
-	}
-
-	return true
-}
-
-func isSortedDescend(arr []int) bool {
-
-	for i := 1; i < len(arr); i++ {
-		if arr[i-1] > arr[i] {
-			return false
-		}
-	}
-
-	return true
-}
-
 func countOperationsToEmptyArray(nums []int) int64 {
 
-	if isSortedAscend(nums) {
-		return int64(len(nums))
+	nlen := len(nums)
+	priority := map[int]int{}
+
+	for i, v := range nums {
+		priority[v] = i
 	}
 
-	if isSortedDescend(nums) {
-		return int64(len(nums)) * 2
-	}
+	sort.Ints(nums)
 
-	var priority []int = make([]int, len(nums))
-	copy(priority, nums)
-	sort.Ints(priority)
+	result := int64(nlen)
 
-	var steps int64
-	for ; len(nums) > 1; steps++ {
+	for i := 1; i < nlen; i++ {
 
-		if priority[0] == nums[0] {
-			nums = nums[1:]
-			priority = priority[1:]
-		} else {
-			temp := nums[0]
-			nums = nums[1:]
-			nums = append(nums, temp)
+		pty, _ := priority[nums[i]]
+		pvpty, _ := priority[nums[i-1]]
+
+		if pty < pvpty {
+			result += int64(nlen - i)
 		}
+
 	}
 
-	return steps + 1
+	return result
 }
 
 func main() {
