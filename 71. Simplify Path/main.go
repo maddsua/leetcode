@@ -8,7 +8,12 @@ func simplifyPath(path string) string {
 		path += "/"
 	}
 
-	result := regexp.MustCompile("\\/\\.\\/").ReplaceAll([]byte(path), []byte("/"))
+	result := regexp.MustCompile("\\/{2,}").ReplaceAll([]byte(path), []byte("/"))
+
+	for dl := 0; dl != len(result); {
+		dl = len(result)
+		result = regexp.MustCompile("\\/\\.\\/").ReplaceAll(result, []byte("/"))
+	}
 
 	for dl := 0; dl != len(result); {
 		dl = len(result)
@@ -16,8 +21,6 @@ func simplifyPath(path string) string {
 	}
 
 	result = regexp.MustCompile("\\/\\.+\\/").ReplaceAll(result, []byte("/"))
-
-	result = regexp.MustCompile("\\/{2,}").ReplaceAll(result, []byte("/"))
 
 	if result[len(result)-1] == '/' && len(result) > 1 {
 		result = result[:len(result)-1]
@@ -28,6 +31,6 @@ func simplifyPath(path string) string {
 
 func main() {
 	//println(simplifyPath("/home//foo/../test/../another/"))
-	println(simplifyPath("/a/./b/../../c/"))
+	//println(simplifyPath("/a/./b/../../c/"))
 	println(simplifyPath("/a//b////c/d//././/.."))
 }
