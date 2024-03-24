@@ -32,5 +32,6 @@ func simplifyPath(path string) string {
 func main() {
 	//println(simplifyPath("/home//foo/../test/../another/"))
 	//println(simplifyPath("/a/./b/../../c/"))
-	println(simplifyPath("/a//b////c/d//././/.."))
+	//println(simplifyPath("/a//b////c/d//././/.."))
+	println(simplifyPath("/a/./b///../c/../././../d/..//../e/./f/./g/././//.//h///././/..///"))
 }
