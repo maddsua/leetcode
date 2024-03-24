@@ -26,5 +26,6 @@ use (
 	"./65. Valid Number"
 	"./68. Text Justification"
 	"./7. Reverse Integer"
+	"./71. Simplify Path"
 	"./75. Sort Colors"
 )
