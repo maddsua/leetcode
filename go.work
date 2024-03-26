@@ -23,6 +23,7 @@ use (
 	"./2. Add Two Numbers"
 	"./2659. Make Array Empty"
 	"./2816. Double a Number Represented as a Linked List"
+	"./287. Find the Duplicate Number"
 	"./295. Find Median from Data Stream"
 	"./41. First Missing Positive"
 	"./535. Encode and Decode TinyURL"
