@@ -26,6 +26,7 @@ use (
 	"./287. Find the Duplicate Number"
 	"./295. Find Median from Data Stream"
 	"./41. First Missing Positive"
+	"./442. Find All Duplicates in an Array"
 	"./535. Encode and Decode TinyURL"
 	"./65. Valid Number"
 	"./68. Text Justification"
