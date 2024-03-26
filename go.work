@@ -28,5 +28,6 @@ use (
 	"./65. Valid Number"
 	"./68. Text Justification"
 	"./7. Reverse Integer"
+	"./73. Set Matrix Zeroes"
 	"./75. Sort Colors"
 )
