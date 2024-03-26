@@ -58,12 +58,15 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 	}
 
-	var result *ListNode
+	if carry {
+		sum = append(sum, 1)
+	}
 
-	for _, v := range sum {
+	var result *ListNode
+	for idx := range sum {
 		result = &ListNode{
 			Next: result,
-			Val:  int(v),
+			Val:  int(sum[len(sum)-1-idx]),
 		}
 	}
 
