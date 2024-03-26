@@ -10,56 +10,38 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func llNumberToSlice(head *ListNode) []int8 {
-
-	var nums []int8
-
-	for it := head; it != nil; it = it.Next {
-		nums = append(nums, int8(it.Val))
-	}
-
-	return nums
-}
-
-func selectLonger(a []int8, b []int8) ([]int8, []int8) {
-
-	if len(a) >= len(b) {
-		return a, b
-	}
-
-	return b, a
-}
-
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
-	primary, secondary := selectLonger(llNumberToSlice(l1), llNumberToSlice(l2))
-
-	var carry bool
+	var carry int8
 	var sum []int8
 
-	for idx, val := range primary {
+	for it1, it2 := l1, l2; it1 != nil || it2 != nil; {
 
-		var sval int8
-		if idx < len(secondary) {
-			sval = secondary[idx]
+		var val1 int8
+		if it1 != nil {
+			val1 = int8(it1.Val)
+			it1 = it1.Next
 		}
 
-		temp := val + sval
-		if carry {
-			temp++
+		var val2 int8
+		if it2 != nil {
+			val2 = int8(it2.Val)
+			it2 = it2.Next
 		}
 
-		if temp < 10 {
-			carry = false
-			sum = append(sum, temp)
+		tempSum := val1 + val2 + carry
+
+		if tempSum < 10 {
+			carry = 0
+			sum = append(sum, tempSum)
 		} else {
-			carry = true
-			sum = append(sum, temp-10)
+			carry = 1
+			sum = append(sum, tempSum-10)
 		}
 	}
 
-	if carry {
-		sum = append(sum, 1)
+	if carry > 0 {
+		sum = append(sum, carry)
 	}
 
 	var result *ListNode
@@ -97,7 +79,7 @@ func printLLNumber(head *ListNode) {
 func main() {
 
 	numA := numberToLL(123)
-	numB := numberToLL(250)
+	numB := numberToLL(1007)
 	printLLNumber(numA)
 	printLLNumber(numB)
 
